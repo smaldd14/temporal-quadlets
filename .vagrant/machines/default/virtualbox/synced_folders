@@ -1,0 +1,1 @@
+{"rsync":{"/tmp/temporal-quadlets":{"type":"rsync","guestpath":"/tmp/temporal-quadlets","hostpath":"/Users/devinsmaldore/code/developer/rpi/temporal-quadlets","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}

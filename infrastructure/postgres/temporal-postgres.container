@@ -1,0 +1,30 @@
+[Unit]
+Description=PostgreSQL Database for Temporal
+
+[Container]
+Image=docker.io/library/postgres:16
+ContainerName=temporal-postgresql
+
+# PostgreSQL configuration
+Environment=POSTGRES_PASSWORD=temporal
+Environment=POSTGRES_USER=temporal
+Environment=POSTGRES_DB=temporal
+
+# Persistent data storage using named volume
+Volume=postgres-data:/var/lib/postgresql/data
+
+# Publish port for access from other user containers
+PublishPort=5432:5432
+
+# Health check
+HealthCmd=pg_isready -U temporal
+HealthInterval=10s
+HealthTimeout=5s
+HealthRetries=5
+
+[Service]
+Restart=always
+TimeoutStartSec=60
+
+[Install]
+WantedBy=multi-user.target

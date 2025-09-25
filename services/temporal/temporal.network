@@ -1,0 +1,8 @@
+[Network]
+NetworkName=temporal-network
+Driver=bridge
+Subnet=172.20.0.0/16
+Gateway=172.20.0.1
+
+[Install]
+WantedBy=multi-user.target

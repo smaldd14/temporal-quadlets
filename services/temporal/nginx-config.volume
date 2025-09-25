@@ -1,0 +1,12 @@
+[Unit]
+Description=Nginx Configuration and Certificates Volume
+
+[Volume]
+# Mount the local config/nginx directory for configuration and certificates
+Driver=local
+Device=/home/temporal/config/nginx
+Type=bind
+Options=bind
+
+[Install]
+WantedBy=multi-user.target

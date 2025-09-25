@@ -1,0 +1,26 @@
+[Unit]
+Description=Temporal UI
+Requires=temporal-server.service
+After=temporal-server.service
+
+[Container]
+Image=docker.io/temporalio/ui:2.39.0
+ContainerName=temporal-ui
+Network=temporal.network
+
+# Connect to temporal server
+Environment=TEMPORAL_ADDRESS=temporal-server:7233
+Environment=TEMPORAL_CORS_ORIGINS=http://localhost:3000
+
+# UI configuration
+Environment=TEMPORAL_UI_PORT=8080
+
+# Internal port only - proxied through nginx
+# Note: Port 8080 is exposed by container image by default
+
+[Service]
+Restart=always
+TimeoutStartSec=60
+
+[Install]
+WantedBy=multi-user.target

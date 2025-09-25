@@ -1,0 +1,12 @@
+[Unit]
+Description=Temporal Dynamic Configuration Volume
+
+[Volume]
+# Mount the local config/temporal directory for dynamic configuration
+Driver=local
+Device=/home/temporal/config/temporal
+Type=bind
+Options=bind
+
+[Install]
+WantedBy=multi-user.target

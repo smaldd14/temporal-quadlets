@@ -1,0 +1,30 @@
+[Unit]
+Description=Nginx Reverse Proxy for Temporal
+Requires=temporal-ui.service
+After=temporal-ui.service
+
+[Container]
+Image=docker.io/library/nginx:1.27-alpine
+ContainerName=temporal-nginx
+Network=temporal.network
+
+# Volume mounts for configuration and certificates
+# Volume=nginx-config-volume:/etc/nginx/config:ro
+Volume=/home/temporal/config/nginx:/etc/nginx/config:ro
+
+# Expose HTTP and HTTPS ports
+PublishPort=80:80
+PublishPort=443:443
+
+# Health check
+HealthCmd=curl -f http://localhost/health || exit 1
+HealthInterval=30s
+HealthTimeout=5s
+HealthRetries=3
+
+[Service]
+Restart=always
+TimeoutStartSec=60
+
+[Install]
+WantedBy=multi-user.target
