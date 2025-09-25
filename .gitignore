@@ -1,0 +1,28 @@
+# Vagrant
+.vagrant/
+
+# SSL certificates and private keys
+*.crt
+*.key
+*.pem
+
+# Temporary and cache files
+*.tmp
+*.temp
+.DS_Store
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS-specific files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Log files
+*.log
+logs/
