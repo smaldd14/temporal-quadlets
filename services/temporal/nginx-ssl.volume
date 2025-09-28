@@ -1,0 +1,12 @@
+[Unit]
+Description=Nginx SSL Certificates Volume
+
+[Volume]
+# Mount the SSL certificates directory
+Driver=local
+Device=/opt/temporal/config/nginx/ssl
+Type=bind
+Options=bind
+
+[Install]
+WantedBy=multi-user.target
