@@ -4,7 +4,7 @@ Description=Nginx Configuration and Certificates Volume
 [Volume]
 # Mount the local config/nginx directory for configuration and certificates
 Driver=local
-Device=/home/temporal/config/nginx
+Device=/opt/temporal/config/nginx/conf.d
 Type=bind
 Options=bind
 

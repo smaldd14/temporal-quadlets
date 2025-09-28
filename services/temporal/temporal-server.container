@@ -1,23 +1,23 @@
 [Unit]
 Description=Temporal Server
-# No direct dependency - postgres runs under different user
+Requires=temporal-postgres.service
+After=temporal-postgres.service
 
 [Container]
 Image=docker.io/temporalio/auto-setup:1.28.1
 ContainerName=temporal-server
-# Use host networking to access postgres on localhost:5432
-Network=host
+Network=temporal-network
+PublishPort=7233:7233
 
 # PostgreSQL configuration (connect to postgres user's database via localhost)
 Environment=DB=postgres12
 Environment=DB_PORT=5432
 Environment=POSTGRES_USER=temporal
 Environment=POSTGRES_PWD=temporal
-Environment=POSTGRES_SEEDS=localhost
+Environment=POSTGRES_SEEDS=temporal-postgresql
+Environment=POSTGRES_DB=temporal
 
 # Basic server configuration - using host networking
-# Environment=TEMPORAL_ADDRESS=127.0.1.1:7233
-# Environment=TEMPORAL_CLI_ADDRESS=127.0.1.1:7233
 
 # Volume mounts for dynamic configuration
 Volume=temporal-config-volume:/etc/temporal/config/dynamicconfig
@@ -25,7 +25,7 @@ Volume=temporal-config-volume:/etc/temporal/config/dynamicconfig
 # Port 7233 automatically available with host networking
 
 # Health check
-HealthCmd=temporal --address temporal-server:7233 operator cluster health
+HealthCmd=temporal --address localhost:7233 operator cluster health
 HealthInterval=30s
 HealthTimeout=10s
 HealthRetries=3
