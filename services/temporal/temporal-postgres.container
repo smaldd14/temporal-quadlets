@@ -14,9 +14,6 @@ Environment=POSTGRES_DB=temporal
 # Persistent data storage using named volume
 Volume=postgres-data:/var/lib/postgresql/data
 
-# Publish port for access from other user containers
-PublishPort=5432:5432
-
 # Health check
 HealthCmd=pg_isready -U temporal
 HealthInterval=10s

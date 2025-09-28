@@ -1,6 +1,7 @@
 [Unit]
 Description=Temporal Server
-# No direct dependency - postgres runs under different user
+Requires=temporal-postgres.service
+After=temporal-postgres.service
 
 [Container]
 Image=docker.io/temporalio/auto-setup:1.28.1
